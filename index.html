@@ -184,35 +184,79 @@
     animation: fadeUp 0.8s 0.3s ease both;
   }
 
-  .hero-card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 28px;
-    width: 280px;
-    box-shadow: 0 20px 60px rgba(11,31,58,0.12);
-    border: 1px solid var(--border);
+  /* ── HERO DIRECTION CARDS ── */
+  .hero-cards-wrap {
+    display: flex; flex-direction: column; gap: 14px;
+    width: 300px;
   }
 
-  .hero-card-header {
-    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  .dir-card {
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(11,31,58,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    position: relative;
   }
-  .hc-icon {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: linear-gradient(135deg, var(--navy), var(--blue));
+
+  /* Axborot xavfsizligi – tech circuit look */
+  .dir-card-cyber {
+    background: linear-gradient(135deg, #0B1F3A 0%, #0d2d50 50%, #0a2240 100%);
+  }
+  .dir-card-cyber::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 80% 20%, rgba(59,158,255,0.25) 0%, transparent 50%),
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(59,158,255,0.04) 28px, rgba(59,158,255,0.04) 29px),
+      repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(59,158,255,0.04) 28px, rgba(59,158,255,0.04) 29px);
+    pointer-events: none;
+  }
+
+  /* Ijtimoiy gumanitar – warm library look */
+  .dir-card-human {
+    background: linear-gradient(135deg, #2D1B00 0%, #4A2E05 50%, #3B2204 100%);
+  }
+  .dir-card-human::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(232,168,37,0.3) 0%, transparent 50%),
+      radial-gradient(circle at 90% 10%, rgba(245,200,66,0.15) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .dir-card-inner { padding: 18px 20px; position: relative; z-index: 1; }
+
+  .dir-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+
+  .dir-icon-wrap {
+    width: 40px; height: 40px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
+    font-size: 20px; flex-shrink: 0;
   }
-  .hc-label { font-size: 13px; font-weight: 600; color: var(--navy); }
-  .hc-sub { font-size: 11px; color: var(--muted); }
+  .dir-icon-cyber { background: rgba(59,158,255,0.2); border: 1px solid rgba(59,158,255,0.3); }
+  .dir-icon-human { background: rgba(232,168,37,0.2); border: 1px solid rgba(232,168,37,0.3); }
 
-  .cyber-badge {
-    background: linear-gradient(135deg, rgba(232,168,37,0.15), rgba(245,200,66,0.1));
-    border: 1px solid rgba(232,168,37,0.3);
-    border-radius: 10px; padding: 12px 14px;
-    margin-bottom: 12px;
+  .dir-name { font-size: 12px; font-weight: 700; color: #fff; line-height: 1.3; }
+  .dir-sub { font-size: 10px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+  .dir-subjects { display: flex; flex-direction: column; gap: 5px; }
+  .dir-sub-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 5px 9px; border-radius: 7px;
   }
-  .cyber-badge-title { font-size: 12px; font-weight: 600; color: var(--gold); margin-bottom: 3px; }
-  .cyber-badge-text { font-size: 11px; color: var(--muted); line-height: 1.4; }
+  .dir-sub-row-cyber { background: rgba(59,158,255,0.1); }
+  .dir-sub-row-human { background: rgba(232,168,37,0.1); }
+
+  .dir-sub-name { font-size: 11px; color: rgba(255,255,255,0.8); }
+  .dir-ball-cyber {
+    font-size: 10px; font-weight: 700; color: #3B9EFF;
+    background: rgba(59,158,255,0.15); padding: 2px 7px; border-radius: 99px;
+  }
+  .dir-ball-human {
+    font-size: 10px; font-weight: 700; color: var(--gold2);
+    background: rgba(232,168,37,0.15); padding: 2px 7px; border-radius: 99px;
+  }
 
   .mini-subjects { display: flex; flex-direction: column; gap: 8px; }
   .mini-sub-row {
@@ -262,19 +306,13 @@
     background: var(--navy);
     border-radius: 20px; padding: 36px;
     color: var(--white); position: relative; overflow: hidden;
-    grid-row: span 2;
   }
   .news-main::before {
     content: '';
-    position: absolute; top: -60px; right: -60px;
-    width: 200px; height: 200px; border-radius: 50%;
-    background: rgba(59,158,255,0.15);
-  }
-  .news-main::after {
-    content: '';
-    position: absolute; bottom: -40px; left: -40px;
-    width: 150px; height: 150px; border-radius: 50%;
-    background: rgba(232,168,37,0.1);
+    position: absolute; top: -50px; right: -50px;
+    width: 160px; height: 160px; border-radius: 50%;
+    background: rgba(59,158,255,0.1);
+    pointer-events: none;
   }
 
   .news-main-date { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
@@ -493,34 +531,62 @@
   </div>
 
   <div class="hero-visual">
-    <div class="hero-card">
-      <div class="hero-card-header">
-        <div class="hc-icon">🧑‍💻</div>
-        <div>
-          <div class="hc-label">Yangi yo'nalish</div>
-          <div class="hc-sub">2025-yildan boshlab</div>
+    <div class="hero-cards-wrap">
+
+      <!-- Yo'nalish 1: Axborot xavfsizligi -->
+      <div class="dir-card dir-card-cyber">
+        <div class="dir-card-inner">
+          <div class="dir-card-header">
+            <div class="dir-icon-wrap dir-icon-cyber">🔐</div>
+            <div>
+              <div class="dir-name">Axborot xavfsizligi</div>
+              <div class="dir-sub">Matematika · Informatika · Chet tili</div>
+            </div>
+          </div>
+          <div class="dir-subjects">
+            <div class="dir-sub-row dir-sub-row-cyber">
+              <span class="dir-sub-name">📐 Matematika · 20 savol</span>
+              <span class="dir-ball-cyber">3.1 ball</span>
+            </div>
+            <div class="dir-sub-row dir-sub-row-cyber">
+              <span class="dir-sub-name">💻 Informatika · 20 savol</span>
+              <span class="dir-ball-cyber">2.1 ball</span>
+            </div>
+            <div class="dir-sub-row dir-sub-row-cyber">
+              <span class="dir-sub-name">🌐 Chet tili · 20 savol</span>
+              <span class="dir-ball-cyber">1.1 ball</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="cyber-badge">
-        <div class="cyber-badge-title">🔐 Kiberxavfsizlik</div>
-        <div class="cyber-badge-text">Matematika va Informatika fanlariga asoslangan yangi yo'nalish qabul boshlandi</div>
+      <!-- Yo'nalish 2: Ijtimoiy-gumanitar -->
+      <div class="dir-card dir-card-human">
+        <div class="dir-card-inner">
+          <div class="dir-card-header">
+            <div class="dir-icon-wrap dir-icon-human">📚</div>
+            <div>
+              <div class="dir-name">Ijtimoiy-gumanitar fanlar</div>
+              <div class="dir-sub">Tarix · Ingliz tili · Ona tili</div>
+            </div>
+          </div>
+          <div class="dir-subjects">
+            <div class="dir-sub-row dir-sub-row-human">
+              <span class="dir-sub-name">🏛 Tarix · 20 savol</span>
+              <span class="dir-ball-human">3.1 ball</span>
+            </div>
+            <div class="dir-sub-row dir-sub-row-human">
+              <span class="dir-sub-name">🌐 Ingliz tili · 20 savol</span>
+              <span class="dir-ball-human">2.1 ball</span>
+            </div>
+            <div class="dir-sub-row dir-sub-row-human">
+              <span class="dir-sub-name">✍️ Ona tili · 20 savol</span>
+              <span class="dir-ball-human">1.1 ball</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="mini-subjects">
-        <div class="mini-sub-row">
-          <span class="mini-sub-name">📐 Matematika</span>
-          <span class="mini-sub-ball">3.1 ball</span>
-        </div>
-        <div class="mini-sub-row">
-          <span class="mini-sub-name">💻 Informatika</span>
-          <span class="mini-sub-ball">2.1 ball</span>
-        </div>
-        <div class="mini-sub-row">
-          <span class="mini-sub-name">🌐 Chet tili</span>
-          <span class="mini-sub-ball">1.1 ball</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -529,18 +595,18 @@
 <section class="news-section" id="qabul">
   <div class="reveal">
     <div class="section-tag">Yangilik & Qabul</div>
-    <h2 class="section-title">Kiberxavfsizlik<br>yo'nalishi haqida</h2>
-    <p class="section-desc">Axborot xavfsizligi sohasida mutaxassis bo'lishni xohlasangiz — bu yo'nalish siz uchun!</p>
+    <h2 class="section-title">Axborot xavfsizligi<br>yo'nalishi haqida</h2>
+    <p class="section-desc">Axborot xavfsizligi yoki Ijtimoiy-gumanitar fanlar yo'nalishida o'qishni xohlasangiz — bu sahifa siz uchun!</p>
   </div>
 
   <div class="news-grid reveal">
     <div class="news-main">
       <div class="news-main-date">N.G.Mardayev · 2-aprel 2025</div>
-      <div class="news-main-tag">🧑‍💻 Yangi yo'nalish</div>
-      <div class="news-main-title">Kiberxavfsizlik yo'nalishi uchun akademik litseyga qabul boshlandi</div>
+      <div class="news-main-tag">🔐 Yangi yo'nalish</div>
+      <div class="news-main-title">Axborot xavfsizligi yo'nalishi uchun akademik litseyga qabul boshlandi</div>
       <div class="news-main-body">
-        Matematika va Informatika fanlariga asoslangan Kiberxavfsizlik yo'nalishi uchun akademik litseyga qabul boshlandi.<br><br>
-        <strong style="color:#fff;">Bilishingiz shart:</strong> Axborot xavfsizligi yo'nalishi bo'yicha nomzodlar 5-bosqich UZBMM tomonidan olinadigan testda quyidagi fanlardan imtihon topshiradi:
+        Matematika va Informatika fanlariga asoslangan Axborot xavfsizligi yo'nalishi uchun akademik litseyga qabul boshlandi.<br><br>
+        <strong style="color:#fff;">Bilishingiz shart:</strong> Nomzodlar 5-bosqich UZBMM tomonidan olinadigan testda quyidagi fanlardan imtihon topshiradi:
       </div>
 
       <div class="exam-table">
@@ -572,19 +638,43 @@
       </div>
     </div>
 
-    <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" class="news-card" target="_blank">
-      <div class="news-card-icon">📝</div>
-      <div class="news-card-title">Qabul jarayoni va shartlar</div>
-      <div class="news-card-desc">Hujjat topshirish tartibi, zaruriy hujjatlar ro'yxati va qabul muddatlari haqida to'liq ma'lumot.</div>
-      <div class="news-card-arrow">→</div>
-    </a>
+    <div class="news-main" style="background: linear-gradient(135deg, #2D1B00 0%, #4A2E05 60%, #3B2204 100%);">
+      <div class="news-main-date">N.G.Mardayev · 2025</div>
+      <div class="news-main-tag" style="background: rgba(232,168,37,0.2); border-color: rgba(232,168,37,0.35); color: #F5C842;">📚 Yo'nalish</div>
+      <div class="news-main-title">Ijtimoiy-gumanitar fanlar yo'nalishi</div>
+      <div class="news-main-body">
+        Tarix, til va ijtimoiy fanlarga qiziquvchi o'quvchilar uchun mo'ljallangan yo'nalish. Kelajak yuristlari, diplomatlar va rahbarlarini tayyorlaydi.<br><br>
+        <strong style="color:#fff;">Bilishingiz shart:</strong> Nomzodlar 5-bosqich UZBMM testida quyidagi fanlardan imtihon topshiradi:
+      </div>
 
-    <a href="https://telegra.ph/Maxsus-professional-tanlov-oz-ichiga-quyidagi-uch-bosqichli-imtihonlardan-iborat-02-14" class="news-card" target="_blank">
-      <div class="news-card-icon">⏳</div>
-      <div class="news-card-title">Imtihon bosqichlari</div>
-      <div class="news-card-desc">3 bosqichli maxsus professional tanlov imtihonlari tartibi va tayyorgarlik maslahatlari.</div>
-      <div class="news-card-arrow">→</div>
-    </a>
+      <div class="exam-table">
+        <div class="exam-row">
+          <span class="exam-name">🏛 Tarix</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball" style="background: var(--gold); color: var(--navy);">3.1 ball</span>
+          </div>
+        </div>
+        <div class="exam-row">
+          <span class="exam-name">🌐 Ingliz tili</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball" style="background: var(--gold); color: var(--navy);">2.1 ball</span>
+          </div>
+        </div>
+        <div class="exam-row">
+          <span class="exam-name">✍️ Ona tili</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball" style="background: var(--gold); color: var(--navy);">1.1 ball</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="source-note-dark">
+        📚 Test savollari 9-sinfgacha bo'lgan maktab darsliklari asosida tuziladi.
+      </div>
+    </div>
   </div>
 </section>
 
@@ -616,16 +706,16 @@
     <a href="https://telegra.ph/Kiberxavfsizlik-yonalishi-04-02" class="sec-card" target="_blank">
       <div class="sec-card-num">03</div>
       <div class="sec-card-icon">🔐</div>
-      <div class="sec-card-title">Kiberxavfsizlik</div>
-      <div class="sec-card-desc">Yangi ochilgan Axborot xavfsizligi yo'nalishi haqida batafsil ma'lumot.</div>
+      <div class="sec-card-title">Axborot xavfsizligi</div>
+      <div class="sec-card-desc">Matematika va Informatika asosidagi yangi yo'nalish haqida batafsil ma'lumot.</div>
       <div class="sec-card-link">Ko'rish <span>→</span></div>
     </a>
 
-    <a href="https://telegra.ph/Akademik-litsey-faoliyatidan-foto-lavhalar-02-18" class="sec-card" target="_blank">
+    <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" class="sec-card" target="_blank">
       <div class="sec-card-num">04</div>
-      <div class="sec-card-icon">📸</div>
-      <div class="sec-card-title">Foto lavhalar</div>
-      <div class="sec-card-desc">Litsey hayotidan eng yaxshi rasmlar va tadbirlar galereyi.</div>
+      <div class="sec-card-icon">🏛</div>
+      <div class="sec-card-title">Ijtimoiy-gumanitar fanlar</div>
+      <div class="sec-card-desc">Tarix, til va ijtimoiy fanlar asosidagi yo'nalish haqida batafsil ma'lumot.</div>
       <div class="sec-card-link">Ko'rish <span>→</span></div>
     </a>
   </div>
