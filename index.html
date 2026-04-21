@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIV Surxondaryo Akademik Litseyi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --navy2: #142B4E;
+    --blue: #1B6CC7;
+    --sky: #3B9EFF;
+    --gold: #E8A825;
+    --gold2: #F5C842;
+    --cream: #FDF8F0;
+    --white: #FFFFFF;
+    --text: #1A2340;
+    --muted: #5C6A85;
+    --border: rgba(27,108,199,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(253,248,240,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(11,31,58,0.08); }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-badge {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px; font-weight: 700;
+    color: var(--navy); line-height: 1.2;
+  }
+  .nav-logo-sub { font-size: 10px; color: var(--muted); font-weight: 400; }
+
+  .nav-links { display: flex; gap: 2px; }
+  .nav-links a {
+    padding: 7px 14px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); background: rgba(11,31,58,0.05); }
+
+  .nav-cta {
+    background: var(--navy); color: var(--white) !important;
+    padding: 8px 18px !important; border-radius: 99px !important;
+  }
+  .nav-cta:hover { background: var(--blue) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(59,158,255,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(232,168,37,0.08) 0%, transparent 50%),
+      var(--cream);
+  }
+
+  .hero-orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(60px); opacity: 0.4; pointer-events: none;
+  }
+  .hero-orb-1 { width: 400px; height: 400px; background: #3B9EFF; top: -80px; right: 10%; animation: float1 8s ease-in-out infinite; }
+  .hero-orb-2 { width: 300px; height: 300px; background: var(--gold); bottom: 5%; left: 5%; animation: float2 10s ease-in-out infinite; }
+  .hero-orb-3 { width: 200px; height: 200px; background: #1B6CC7; top: 50%; right: 30%; animation: float1 12s ease-in-out infinite reverse; }
+
+  @keyframes float1 { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-30px)} }
+  @keyframes float2 { 0%,100%{transform:translateY(0px) translateX(0px)} 50%{transform:translateY(-20px) translateX(15px)} }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    max-width: 680px;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(27,108,199,0.1);
+    border: 1px solid rgba(27,108,199,0.2);
+    border-radius: 99px; padding: 6px 16px;
+    font-size: 12px; font-weight: 600; color: var(--blue);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sky); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 68px);
+    font-weight: 900; line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 12px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title span { color: var(--blue); }
+  .hero-title .gold { color: var(--gold); }
+
+  .hero-sub-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 700; color: var(--navy2);
+    margin-bottom: 20px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .hero-desc {
+    font-size: 16px; line-height: 1.7; color: var(--muted);
+    max-width: 520px; margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.25s ease both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--navy); color: var(--white);
+    padding: 14px 28px; border-radius: 99px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    transition: all 0.25s; box-shadow: 0 4px 20px rgba(11,31,58,0.2);
+  }
+  .btn-primary:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(27,108,199,0.35); }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--navy);
+    padding: 14px 28px; border-radius: 99px;
+    font-size: 14px; font-weight: 600; text-decoration: none;
+    border: 1.5px solid rgba(11,31,58,0.2);
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 56px; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .stat-item { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--navy); }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+  .hero-visual {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    z-index: 1;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px;
+    width: 280px;
+    box-shadow: 0 20px 60px rgba(11,31,58,0.12);
+    border: 1px solid var(--border);
+  }
+
+  .hero-card-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+  }
+  .hc-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .hc-label { font-size: 13px; font-weight: 600; color: var(--navy); }
+  .hc-sub { font-size: 11px; color: var(--muted); }
+
+  .cyber-badge {
+    background: linear-gradient(135deg, rgba(232,168,37,0.15), rgba(245,200,66,0.1));
+    border: 1px solid rgba(232,168,37,0.3);
+    border-radius: 10px; padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  .cyber-badge-title { font-size: 12px; font-weight: 600; color: var(--gold); margin-bottom: 3px; }
+  .cyber-badge-text { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+  .mini-subjects { display: flex; flex-direction: column; gap: 8px; }
+  .mini-sub-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 10px; background: var(--cream); border-radius: 8px;
+  }
+  .mini-sub-name { font-size: 12px; font-weight: 500; color: var(--text); }
+  .mini-sub-ball {
+    font-size: 11px; font-weight: 600;
+    color: var(--white); background: var(--blue);
+    padding: 2px 8px; border-radius: 99px;
+  }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 80px 5%; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 900; color: var(--navy);
+    line-height: 1.15; margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 15px; color: var(--muted); line-height: 1.7;
+    max-width: 520px;
+  }
+
+  /* ── NEWS SECTION ── */
+  .news-section { background: var(--white); }
+
+  .news-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 48px;
+  }
+
+  .news-main {
+    background: var(--navy);
+    border-radius: 20px; padding: 36px;
+    color: var(--white); position: relative; overflow: hidden;
+    grid-row: span 2;
+  }
+  .news-main::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(59,158,255,0.15);
+  }
+  .news-main::after {
+    content: '';
+    position: absolute; bottom: -40px; left: -40px;
+    width: 150px; height: 150px; border-radius: 50%;
+    background: rgba(232,168,37,0.1);
+  }
+
+  .news-main-date { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+  .news-main-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(232,168,37,0.2); border: 1px solid rgba(232,168,37,0.3);
+    color: var(--gold2); font-size: 11px; font-weight: 600;
+    padding: 4px 12px; border-radius: 99px; margin-bottom: 20px;
+  }
+  .news-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700; line-height: 1.3;
+    margin-bottom: 14px; position: relative; z-index: 1;
+  }
+  .news-main-body { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.75); position: relative; z-index: 1; }
+
+  .exam-table {
+    margin-top: 24px; position: relative; z-index: 1;
+  }
+  .exam-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .exam-row:last-child { border-bottom: none; }
+  .exam-name { font-size: 13px; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 8px; }
+  .exam-info { display: flex; align-items: center; gap: 8px; }
+  .exam-q { font-size: 11px; color: rgba(255,255,255,0.4); }
+  .exam-ball {
+    background: var(--gold); color: var(--navy);
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px;
+  }
+
+  .source-note-dark {
+    margin-top: 20px; padding: 12px 16px;
+    background: rgba(255,255,255,0.06); border-radius: 10px;
+    font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+
+  .news-card {
+    background: var(--cream);
+    border-radius: 16px; padding: 24px;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    text-decoration: none; display: block; color: inherit;
+  }
+  .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(11,31,58,0.1); background: var(--white); }
+
+  .news-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .news-card-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 6px; line-height: 1.4; }
+  .news-card-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .news-card-arrow { margin-top: 16px; font-size: 18px; color: var(--blue); }
+
+  /* ── SECTIONS GRID ── */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+
+  .sec-card {
+    background: var(--white);
+    border-radius: 16px; padding: 28px 24px;
+    border: 1px solid var(--border);
+    text-decoration: none; display: block; color: inherit;
+    transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .sec-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--navy), var(--blue));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .sec-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(11,31,58,0.1); }
+  .sec-card:hover::before { transform: scaleX(1); }
+
+  .sec-card-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: rgba(11,31,58,0.06); position: absolute; top: 16px; right: 20px; }
+  .sec-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .sec-card-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+  .sec-card-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .sec-card-link { margin-top: 16px; font-size: 12px; font-weight: 600; color: var(--blue); display: flex; align-items: center; gap: 4px; }
+
+  /* ── GALLERY CTA ── */
+  .gallery-cta {
+    background: var(--navy);
+    border-radius: 24px;
+    padding: 56px 5%;
+    margin: 0 5% 80px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 32px; flex-wrap: wrap;
+    position: relative; overflow: hidden;
+  }
+  .gallery-cta::before {
+    content: '';
+    position: absolute; right: -80px; top: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(59,158,255,0.1);
+  }
+  .gallery-cta-text { max-width: 480px; }
+  .gallery-cta-tag { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .gallery-cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px; font-weight: 900; color: var(--white); line-height: 1.2; margin-bottom: 12px;
+  }
+  .gallery-cta-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+  .gallery-cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold); color: var(--navy);
+    padding: 14px 28px; border-radius: 99px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    transition: all 0.25s; white-space: nowrap;
+    position: relative; z-index: 1;
+  }
+  .gallery-cta-btn:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,168,37,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 40px 5% 28px;
+    color: rgba(255,255,255,0.6);
+  }
+  .footer-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 24px; margin-bottom: 20px;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--white); }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.5); text-decoration: none; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 12px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-visual { display: none; }
+    .nav-links { display: none; }
+    .news-grid { grid-template-columns: 1fr; }
+    .news-main { grid-row: span 1; }
+    .gallery-cta { text-align: center; justify-content: center; }
+  }
+
+  /* ── SCROLL ANIMATION ── */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-badge">🏛</div>
+    <div>
+      <div class="nav-logo-text">IIV Surxondaryo</div>
+      <div class="nav-logo-sub">Akademik Litseyi</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#qabul">Qabul</a>
+    <a href="#bolimlар">Bo'limlar</a>
+    <a href="#gallery">Galereya</a>
+    <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" class="nav-cta" target="_blank">Hujjat topshirish →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Qabul ochiq · 2025-yil
+    </div>
+
+    <h1 class="hero-title">
+      IIV Surxondaryo<br>
+      <span>Akademik</span><br>
+      <span class="gold">Litseyi</span>
+    </h1>
+
+    <p class="hero-desc">
+      Kelajak rahbarlarini tayyorlaydigan, zamonaviy ta'lim muhiti va ilg'or dasturlar asosida faoliyat yurituvchi elita ta'lim muassasasi.
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" class="btn-primary" target="_blank">
+        📝 Qabul jarayoni
+      </a>
+      <a href="#bolimlар" class="btn-secondary">
+        Ko'proq bilish ↓
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Ta'lim yo'nalishi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Bosqichli tanlov</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">9+</div>
+        <div class="stat-label">Yil tajriba</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <div class="hc-icon">🧑‍💻</div>
+        <div>
+          <div class="hc-label">Yangi yo'nalish</div>
+          <div class="hc-sub">2025-yildan boshlab</div>
+        </div>
+      </div>
+
+      <div class="cyber-badge">
+        <div class="cyber-badge-title">🔐 Kiberxavfsizlik</div>
+        <div class="cyber-badge-text">Matematika va Informatika fanlariga asoslangan yangi yo'nalish qabul boshlandi</div>
+      </div>
+
+      <div class="mini-subjects">
+        <div class="mini-sub-row">
+          <span class="mini-sub-name">📐 Matematika</span>
+          <span class="mini-sub-ball">3.1 ball</span>
+        </div>
+        <div class="mini-sub-row">
+          <span class="mini-sub-name">💻 Informatika</span>
+          <span class="mini-sub-ball">2.1 ball</span>
+        </div>
+        <div class="mini-sub-row">
+          <span class="mini-sub-name">🌐 Chet tili</span>
+          <span class="mini-sub-ball">1.1 ball</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS / QABUL -->
+<section class="news-section" id="qabul">
+  <div class="reveal">
+    <div class="section-tag">Yangilik & Qabul</div>
+    <h2 class="section-title">Kiberxavfsizlik<br>yo'nalishi haqida</h2>
+    <p class="section-desc">Axborot xavfsizligi sohasida mutaxassis bo'lishni xohlasangiz — bu yo'nalish siz uchun!</p>
+  </div>
+
+  <div class="news-grid reveal">
+    <div class="news-main">
+      <div class="news-main-date">N.G.Mardayev · 2-aprel 2025</div>
+      <div class="news-main-tag">🧑‍💻 Yangi yo'nalish</div>
+      <div class="news-main-title">Kiberxavfsizlik yo'nalishi uchun akademik litseyga qabul boshlandi</div>
+      <div class="news-main-body">
+        Matematika va Informatika fanlariga asoslangan Kiberxavfsizlik yo'nalishi uchun akademik litseyga qabul boshlandi.<br><br>
+        <strong style="color:#fff;">Bilishingiz shart:</strong> Axborot xavfsizligi yo'nalishi bo'yicha nomzodlar 5-bosqich UZBMM tomonidan olinadigan testda quyidagi fanlardan imtihon topshiradi:
+      </div>
+
+      <div class="exam-table">
+        <div class="exam-row">
+          <span class="exam-name">📐 Matematika</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball">3.1 ball</span>
+          </div>
+        </div>
+        <div class="exam-row">
+          <span class="exam-name">💻 Informatika</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball">2.1 ball</span>
+          </div>
+        </div>
+        <div class="exam-row">
+          <span class="exam-name">🌐 Chet tili</span>
+          <div class="exam-info">
+            <span class="exam-q">20 ta savol</span>
+            <span class="exam-ball">1.1 ball</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="source-note-dark">
+        📚 Test savollari 9-sinfgacha bo'lgan maktab darsliklari asosida tuziladi.
+      </div>
+    </div>
+
+    <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" class="news-card" target="_blank">
+      <div class="news-card-icon">📝</div>
+      <div class="news-card-title">Qabul jarayoni va shartlar</div>
+      <div class="news-card-desc">Hujjat topshirish tartibi, zaruriy hujjatlar ro'yxati va qabul muddatlari haqida to'liq ma'lumot.</div>
+      <div class="news-card-arrow">→</div>
+    </a>
+
+    <a href="https://telegra.ph/Maxsus-professional-tanlov-oz-ichiga-quyidagi-uch-bosqichli-imtihonlardan-iborat-02-14" class="news-card" target="_blank">
+      <div class="news-card-icon">⏳</div>
+      <div class="news-card-title">Imtihon bosqichlari</div>
+      <div class="news-card-desc">3 bosqichli maxsus professional tanlov imtihonlari tartibi va tayyorgarlik maslahatlari.</div>
+      <div class="news-card-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- BO'LIMLAR -->
+<section id="bolimlар" style="background: var(--cream);">
+  <div class="reveal">
+    <div class="section-tag">Asosiy bo'limlar</div>
+    <h2 class="section-title">Hamma narsa<br>bir joyda</h2>
+    <p class="section-desc">Litsey hayoti, o'quv jarayoni va o'quvchilarga beriladigan barcha imtiyozlar haqida.</p>
+  </div>
+
+  <div class="sections-grid reveal">
+    <a href="https://telegra.ph/salom-02-12-13" class="sec-card" target="_blank">
+      <div class="sec-card-num">01</div>
+      <div class="sec-card-icon">👩‍🏫</div>
+      <div class="sec-card-title">O'quv jarayoni</div>
+      <div class="sec-card-desc">Dars jadvali, o'quv dasturlari, fanlar va ustoz-murabbiylar haqida.</div>
+      <div class="sec-card-link">Ko'rish <span>→</span></div>
+    </a>
+
+    <a href="https://telegra.ph/Imtiyozlarimiz-02-18" class="sec-card" target="_blank">
+      <div class="sec-card-num">02</div>
+      <div class="sec-card-icon">🎁</div>
+      <div class="sec-card-title">O'quvchi imtiyozlari</div>
+      <div class="sec-card-desc">Stipendiya, turar joy, ovqatlanish va boshqa barcha imtiyozlar haqida.</div>
+      <div class="sec-card-link">Ko'rish <span>→</span></div>
+    </a>
+
+    <a href="https://telegra.ph/Kiberxavfsizlik-yonalishi-04-02" class="sec-card" target="_blank">
+      <div class="sec-card-num">03</div>
+      <div class="sec-card-icon">🔐</div>
+      <div class="sec-card-title">Kiberxavfsizlik</div>
+      <div class="sec-card-desc">Yangi ochilgan Axborot xavfsizligi yo'nalishi haqida batafsil ma'lumot.</div>
+      <div class="sec-card-link">Ko'rish <span>→</span></div>
+    </a>
+
+    <a href="https://telegra.ph/Akademik-litsey-faoliyatidan-foto-lavhalar-02-18" class="sec-card" target="_blank">
+      <div class="sec-card-num">04</div>
+      <div class="sec-card-icon">📸</div>
+      <div class="sec-card-title">Foto lavhalar</div>
+      <div class="sec-card-desc">Litsey hayotidan eng yaxshi rasmlar va tadbirlar galereyi.</div>
+      <div class="sec-card-link">Ko'rish <span>→</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- GALLERY CTA -->
+<div class="gallery-cta reveal" id="gallery">
+  <div class="gallery-cta-text">
+    <div class="gallery-cta-tag">📸 Galereya</div>
+    <h3 class="gallery-cta-title">Litsey hayotidan eng go'zal lahzalar</h3>
+    <p class="gallery-cta-desc">Tadbirlar, sport musobaqalari, olimpiadalar va kundalik hayotdan olingan rasmlar to'plami.</p>
+  </div>
+  <a href="https://telegra.ph/Akademik-litsey-faoliyatidan-foto-lavhalar-02-18" class="gallery-cta-btn" target="_blank">
+    📷 Galereyani ko'rish
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">IIV Surxondaryo Akademik Litseyi</div>
+    <div class="footer-links">
+      <a href="https://telegra.ph/IIV-Surxondaryo-akademik-litseyiga-oqishga-qabul-jarayonlari-02-14" target="_blank">Qabul</a>
+      <a href="https://telegra.ph/Imtiyozlarimiz-02-18" target="_blank">Imtiyozlar</a>
+      <a href="https://telegra.ph/Akademik-litsey-faoliyatidan-foto-lavhalar-02-18" target="_blank">Galereya</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 IIV Surxondaryo Akademik Litseyi · N.G.Mardayev</div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
